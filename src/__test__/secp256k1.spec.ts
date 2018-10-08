@@ -1,7 +1,7 @@
 import {
-    signEcdsa,
-    verifyEcdsa,
-    recoverEcdsa,
+    signSchnorr,
+    verifySchnorr,
+    recoverSchnorr,
     getPublicFromPrivate
 } from "../utils";
 
@@ -14,23 +14,21 @@ test("public key", () => {
 });
 
 test("sign", () => {
-    const signature = signEcdsa(msg, priv);
+    const signature = signSchnorr(msg, priv);
     expect(signature).toEqual({
         r: "d8706a863775325b1b8c3f16c19ff337c2699c4f857be903e08a5a9234c5a5c7",
-        s: "19d685ae28e52081480b08a3a1e5d8dd1f852b78f65a7e99af37ad42ebc5f375",
-        v: 0
+        s: "14692567c1d9e0c3eed5de125cb882c33b74d447c08a2db5db24283df7741815"
     });
 });
 
 test("verify - success", () => {
-    const result = verifyEcdsa(
+    const result = verifySchnorr(
         msg,
         {
             r:
                 "d8706a863775325b1b8c3f16c19ff337c2699c4f857be903e08a5a9234c5a5c7",
             s:
-                "19d685ae28e52081480b08a3a1e5d8dd1f852b78f65a7e99af37ad42ebc5f375",
-            v: 0
+                "14692567c1d9e0c3eed5de125cb882c33b74d447c08a2db5db24283df7741815"
         },
         getPublicFromPrivate(priv)
     );
@@ -38,14 +36,13 @@ test("verify - success", () => {
 });
 
 test("verify - fail", () => {
-    const result = verifyEcdsa(
+    const result = verifySchnorr(
         "0000000000000000000000000000000000000000000000000000000000000000",
         {
             r:
                 "d8706a863775325b1b8c3f16c19ff337c2699c4f857be903e08a5a9234c5a5c7",
             s:
-                "19d685ae28e52081480b08a3a1e5d8dd1f852b78f65a7e99af37ad42ebc5f375",
-            v: 0
+                "14692567c1d9e0c3eed5de125cb882c33b74d447c08a2db5db24283df7741815"
         },
         getPublicFromPrivate(priv)
     );
@@ -53,10 +50,9 @@ test("verify - fail", () => {
 });
 
 test("recover", () => {
-    const a = recoverEcdsa(msg, {
+    const a = recoverSchnorr(msg, {
         r: "d8706a863775325b1b8c3f16c19ff337c2699c4f857be903e08a5a9234c5a5c7",
-        s: "19d685ae28e52081480b08a3a1e5d8dd1f852b78f65a7e99af37ad42ebc5f375",
-        v: 0
+        s: "14692567c1d9e0c3eed5de125cb882c33b74d447c08a2db5db24283df7741815"
     });
     expect(a).toBe(getPublicFromPrivate(priv));
 });

@@ -116,8 +116,7 @@ test("sign", () => {
         nonce: 0,
         fee: 0
     });
-    const { v, r, s } = signed.signature();
-    expect(v).toBe(1);
+    const { r, s } = signed.signature();
     expect(r.toEncodeObject()).toEqual(
         new U256(
             "0x8e1718666082bad693c4a899da5aa09e074f9af76f6ebfe56603c4162cb54cda"
@@ -125,7 +124,7 @@ test("sign", () => {
     );
     expect(s.toEncodeObject()).toEqual(
         new U256(
-            "0x5ff543d92956ee5a45b9bbb28a22fd291792258691290be26c4d08ece010c6e6"
+            "0x70f06caa391551fd8991a45674ef7cbf7e68a616f3d60eac5196470a06cdab0e"
         ).toEncodeObject()
     );
 });
@@ -140,7 +139,7 @@ test("signed hash", () => {
     });
     expect(signed.hash()).toEqual(
         new H256(
-            "fb9410043ceefdef45f346e035fbd037b919c46dc678511b997011176e4accbb"
+            "24d358b15c933477d45938afc933d040a0297516c8347a72adcc652bcf23a324"
         )
     );
 });
