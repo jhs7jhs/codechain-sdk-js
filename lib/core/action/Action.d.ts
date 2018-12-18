@@ -1,0 +1,11 @@
+import { AssetTransaction } from "./AssetTransaction";
+import { CreateShard } from "./CreateShard";
+import { Payment } from "./Payment";
+import { Remove } from "./Remove";
+import { SetRegularKey } from "./SetRegularKey";
+import { SetShardOwners } from "./SetShardOwners";
+import { SetShardUsers } from "./SetShardUsers";
+import { Store } from "./Store";
+import { WrapCCC } from "./WrapCCC";
+export declare type Action = AssetTransaction | Payment | SetRegularKey | CreateShard | SetShardOwners | SetShardUsers | WrapCCC | Store | Remove;
+export declare function getActionFromJSON(json: any): Action;
