@@ -303,7 +303,7 @@ describe("Invalid response", () => {
             test("undefined", done => {
                 rpc.sendRpcRequest = jest.fn().mockResolvedValueOnce(undefined);
                 chainRpc
-                    .getAssetSchemeByType(hash)
+                    .getAssetSchemeByType(hash, 0)
                     .then(() => done.fail())
                     .catch(e => {
                         expect(e.toString()).toContain(
@@ -323,7 +323,7 @@ describe("Invalid response", () => {
             test("undefined", done => {
                 rpc.sendRpcRequest = jest.fn().mockResolvedValueOnce(undefined);
                 chainRpc
-                    .getAsset(hash, 0)
+                    .getAsset(hash, 0, 0)
                     .then(() => done.fail())
                     .catch(e => {
                         expect(e.toString()).toContain("chain_getAsset");
